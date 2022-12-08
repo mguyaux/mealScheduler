@@ -1,0 +1,97 @@
+<div>
+  <h2 id="page-heading" data-cy="UserInfoHeading">
+    <span mscheTranslate="mealScheduelerApp.userInfo.home.title">UserInfos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span mscheTranslate="mealScheduelerApp.userInfo.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-user-info"
+        [routerLink]="['/user-info/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span mscheTranslate="mealScheduelerApp.userInfo.home.createLabel"> Créer un nouveau User Info </span>
+      </button>
+    </div>
+  </h2>
+
+  <msche-alert-error></msche-alert-error>
+
+  <msche-alert></msche-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="userInfos?.length === 0">
+    <span mscheTranslate="mealScheduelerApp.userInfo.home.notFound">Aucun User Info trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="userInfos && userInfos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr mscheSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" mscheSortBy="id">
+            <div class="d-flex">
+              <span mscheTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="nbOfPerson">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.userInfo.nbOfPerson">Nb Of Person</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="user.id">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.userInfo.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userInfo of userInfos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/user-info', userInfo.id, 'view']">{{ userInfo.id }}</a>
+          </td>
+          <td>{{ userInfo.nbOfPerson }}</td>
+          <td>
+            {{ userInfo.user?.id }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/user-info', userInfo.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/user-info', userInfo.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(userInfo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

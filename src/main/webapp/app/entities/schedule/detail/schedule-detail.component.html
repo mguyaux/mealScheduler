@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schedule">
+      <h2 data-cy="scheduleDetailsHeading"><span mscheTranslate="mealScheduelerApp.schedule.detail.title">Schedule</span></h2>
+
+      <hr />
+
+      <msche-alert-error></msche-alert-error>
+
+      <msche-alert></msche-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span mscheTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schedule.id }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.schedule.meal">Meal</span></dt>
+        <dd>
+          <span mscheTranslate="{{ 'mealScheduelerApp.Meal.' + schedule.meal }}">{{ schedule.meal }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.schedule.date">Date</span></dt>
+        <dd>
+          <span>{{ schedule.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.schedule.user">User</span></dt>
+        <dd>
+          <span>{{ schedule.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span mscheTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/schedule', schedule.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span mscheTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

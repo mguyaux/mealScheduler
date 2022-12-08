@@ -1,0 +1,29 @@
+{
+  "applications": ["mealSchedueler"],
+  "changelogDate": "20221208201647",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "user_info",
+  "fields": [
+    {
+      "fieldName": "nbOfPerson",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UserInfo",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

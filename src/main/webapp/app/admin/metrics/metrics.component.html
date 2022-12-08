@@ -1,51 +1,51 @@
 <div>
   <h2>
-    <span id="metrics-page-heading" jhiTranslate="metrics.title" data-cy="metricsPageHeading">Application Metrics</span>
+    <span id="metrics-page-heading" mscheTranslate="metrics.title" data-cy="metricsPageHeading">Métriques de l'application</span>
 
     <button class="btn btn-primary float-end" (click)="refresh()">
-      <fa-icon icon="sync"></fa-icon> <span jhiTranslate="metrics.refresh.button">Refresh</span>
+      <fa-icon icon="sync"></fa-icon> <span mscheTranslate="metrics.refresh.button">Rafraîchir</span>
     </button>
   </h2>
 
-  <h3 jhiTranslate="metrics.jvm.title">JVM Metrics</h3>
+  <h3 mscheTranslate="metrics.jvm.title">Métriques de la JVM</h3>
 
   <div class="row" *ngIf="metrics && !updatingMetrics">
-    <jhi-jvm-memory class="col-md-4" [updating]="updatingMetrics" [jvmMemoryMetrics]="metrics.jvm"></jhi-jvm-memory>
+    <msche-jvm-memory class="col-md-4" [updating]="updatingMetrics" [jvmMemoryMetrics]="metrics.jvm"></msche-jvm-memory>
 
-    <jhi-jvm-threads class="col-md-4" [threads]="threads"></jhi-jvm-threads>
+    <msche-jvm-threads class="col-md-4" [threads]="threads"></msche-jvm-threads>
 
-    <jhi-metrics-system class="col-md-4" [updating]="updatingMetrics" [systemMetrics]="metrics.processMetrics"></jhi-metrics-system>
+    <msche-metrics-system class="col-md-4" [updating]="updatingMetrics" [systemMetrics]="metrics.processMetrics"></msche-metrics-system>
   </div>
 
-  <jhi-metrics-garbagecollector
+  <msche-metrics-garbagecollector
     *ngIf="metrics && metricsKeyExists('garbageCollector')"
     [updating]="updatingMetrics"
     [garbageCollectorMetrics]="metrics.garbageCollector"
-  ></jhi-metrics-garbagecollector>
+  ></msche-metrics-garbagecollector>
 
-  <div class="well well-lg" *ngIf="updatingMetrics" jhiTranslate="metrics.updating">Updating...</div>
+  <div class="well well-lg" *ngIf="updatingMetrics" mscheTranslate="metrics.updating">Mise à jour...</div>
 
-  <jhi-metrics-request
+  <msche-metrics-request
     *ngIf="metrics && metricsKeyExists('http.server.requests')"
     [updating]="updatingMetrics"
     [requestMetrics]="metrics['http.server.requests']"
-  ></jhi-metrics-request>
+  ></msche-metrics-request>
 
-  <jhi-metrics-endpoints-requests
+  <msche-metrics-endpoints-requests
     *ngIf="metrics && metricsKeyExists('services')"
     [updating]="updatingMetrics"
     [endpointsRequestsMetrics]="metrics.services"
-  ></jhi-metrics-endpoints-requests>
+  ></msche-metrics-endpoints-requests>
 
-  <jhi-metrics-cache
+  <msche-metrics-cache
     *ngIf="metrics && metricsKeyExists('cache')"
     [updating]="updatingMetrics"
     [cacheMetrics]="metrics.cache"
-  ></jhi-metrics-cache>
+  ></msche-metrics-cache>
 
-  <jhi-metrics-datasource
+  <msche-metrics-datasource
     *ngIf="metrics && metricsKeyExistsAndObjectNotEmpty('databases')"
     [updating]="updatingMetrics"
     [datasourceMetrics]="metrics.databases"
-  ></jhi-metrics-datasource>
+  ></msche-metrics-datasource>
 </div>

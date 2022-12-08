@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="msche-recipe-ingredient-heading"
+        data-cy="RecipeIngredientCreateUpdateHeading"
+        mscheTranslate="mealScheduelerApp.recipeIngredient.home.createOrEditLabel"
+      >
+        Créer ou éditer un Recipe Ingredient
+      </h2>
+
+      <div>
+        <msche-alert-error></msche-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" mscheTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipeIngredient.quantity" for="field_quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+          <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantity')?.errors?.required"
+              mscheTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('quantity')?.errors?.number"
+              mscheTranslate="entity.validation.number"
+            >
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipeIngredient.recipe" for="field_recipe">Recipe</label>
+          <select
+            class="form-control"
+            id="field_recipe"
+            data-cy="recipe"
+            name="recipe"
+            formControlName="recipe"
+            [compareWith]="compareRecipe"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="recipeOption" *ngFor="let recipeOption of recipesSharedCollection">{{ recipeOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipeIngredient.unit" for="field_unit">Unit</label>
+          <select class="form-control" id="field_unit" data-cy="unit" name="unit" formControlName="unit" [compareWith]="compareMesure">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="mesureOption" *ngFor="let mesureOption of mesuresSharedCollection">{{ mesureOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipeIngredient.ingredient" for="field_ingredient">Ingredient</label>
+          <select
+            class="form-control"
+            id="field_ingredient"
+            data-cy="ingredient"
+            name="ingredient"
+            formControlName="ingredient"
+            [compareWith]="compareIngredient"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="ingredientOption" *ngFor="let ingredientOption of ingredientsSharedCollection">
+              {{ ingredientOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span mscheTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span mscheTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

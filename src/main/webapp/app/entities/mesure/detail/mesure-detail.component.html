@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mesure">
+      <h2 data-cy="mesureDetailsHeading"><span mscheTranslate="mealScheduelerApp.mesure.detail.title">Mesure</span></h2>
+
+      <hr />
+
+      <msche-alert-error></msche-alert-error>
+
+      <msche-alert></msche-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span mscheTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ mesure.id }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.mesure.symbol">Symbol</span></dt>
+        <dd>
+          <span>{{ mesure.symbol }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span mscheTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mesure', mesure.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span mscheTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

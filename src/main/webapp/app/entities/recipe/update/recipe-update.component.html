@@ -1,0 +1,155 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="msche-recipe-heading" data-cy="RecipeCreateUpdateHeading" mscheTranslate="mealScheduelerApp.recipe.home.createOrEditLabel">
+        Créer ou éditer un Recipe
+      </h2>
+
+      <div>
+        <msche-alert-error></msche-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" mscheTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipe.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" mscheTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipe.instructions" for="field_instructions">Instructions</label>
+          <textarea
+            class="form-control"
+            name="instructions"
+            id="field_instructions"
+            data-cy="instructions"
+            formControlName="instructions"
+          ></textarea>
+          <div
+            *ngIf="editForm.get('instructions')!.invalid && (editForm.get('instructions')!.dirty || editForm.get('instructions')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('instructions')?.errors?.required"
+              mscheTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipe.nbOfPerson" for="field_nbOfPerson">Nb Of Person</label>
+          <input
+            type="number"
+            class="form-control"
+            name="nbOfPerson"
+            id="field_nbOfPerson"
+            data-cy="nbOfPerson"
+            formControlName="nbOfPerson"
+          />
+          <div *ngIf="editForm.get('nbOfPerson')!.invalid && (editForm.get('nbOfPerson')!.dirty || editForm.get('nbOfPerson')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nbOfPerson')?.errors?.required"
+              mscheTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nbOfPerson')?.errors?.min"
+              mscheTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              Ce champ doit être supérieur à 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('nbOfPerson')?.errors?.number"
+              mscheTranslate="entity.validation.number"
+            >
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipe.publicAccess" for="field_publicAccess">Public Access</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="publicAccess"
+            id="field_publicAccess"
+            data-cy="publicAccess"
+            formControlName="publicAccess"
+          />
+          <div
+            *ngIf="editForm.get('publicAccess')!.invalid && (editForm.get('publicAccess')!.dirty || editForm.get('publicAccess')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('publicAccess')?.errors?.required"
+              mscheTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipe.author" for="field_author">Author</label>
+          <select
+            class="form-control"
+            id="field_author"
+            data-cy="author"
+            name="author"
+            formControlName="author"
+            [compareWith]="compareUser"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" mscheTranslate="mealScheduelerApp.recipe.schedule" for="field_schedule">Schedule</label>
+          <select
+            class="form-control"
+            id="field_schedule"
+            data-cy="schedule"
+            name="schedule"
+            formControlName="schedule"
+            [compareWith]="compareSchedule"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="scheduleOption" *ngFor="let scheduleOption of schedulesSharedCollection">{{ scheduleOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span mscheTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span mscheTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

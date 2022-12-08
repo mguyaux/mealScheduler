@@ -1,0 +1,104 @@
+<div>
+  <h2 id="page-heading" data-cy="ScheduleHeading">
+    <span mscheTranslate="mealScheduelerApp.schedule.home.title">Schedules</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span mscheTranslate="mealScheduelerApp.schedule.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-schedule"
+        [routerLink]="['/schedule/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span mscheTranslate="mealScheduelerApp.schedule.home.createLabel"> Créer un nouveau Schedule </span>
+      </button>
+    </div>
+  </h2>
+
+  <msche-alert-error></msche-alert-error>
+
+  <msche-alert></msche-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="schedules?.length === 0">
+    <span mscheTranslate="mealScheduelerApp.schedule.home.notFound">Aucun Schedule trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="schedules && schedules.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr mscheSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" mscheSortBy="id">
+            <div class="d-flex">
+              <span mscheTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="meal">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.schedule.meal">Meal</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="date">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.schedule.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="user.id">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.schedule.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schedule of schedules; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/schedule', schedule.id, 'view']">{{ schedule.id }}</a>
+          </td>
+          <td mscheTranslate="{{ 'mealScheduelerApp.Meal.' + schedule.meal }}">{{ schedule.meal }}</td>
+          <td>{{ schedule.date | formatMediumDate }}</td>
+          <td>
+            {{ schedule.user?.id }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/schedule', schedule.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/schedule', schedule.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(schedule)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

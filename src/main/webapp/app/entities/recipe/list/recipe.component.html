@@ -1,0 +1,119 @@
+<div>
+  <h2 id="page-heading" data-cy="RecipeHeading">
+    <span mscheTranslate="mealScheduelerApp.recipe.home.title">Recipes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span mscheTranslate="mealScheduelerApp.recipe.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-recipe"
+        [routerLink]="['/recipe/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span mscheTranslate="mealScheduelerApp.recipe.home.createLabel"> Créer un nouveau Recipe </span>
+      </button>
+    </div>
+  </h2>
+
+  <msche-alert-error></msche-alert-error>
+
+  <msche-alert></msche-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="recipes?.length === 0">
+    <span mscheTranslate="mealScheduelerApp.recipe.home.notFound">Aucun Recipe trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="recipes && recipes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr mscheSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" mscheSortBy="id">
+            <div class="d-flex">
+              <span mscheTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="name">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.recipe.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="instructions">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.recipe.instructions">Instructions</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="nbOfPerson">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.recipe.nbOfPerson">Nb Of Person</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="publicAccess">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.recipe.publicAccess">Public Access</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="author.id">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.recipe.author">Author</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" mscheSortBy="schedule.id">
+            <div class="d-flex">
+              <span mscheTranslate="mealScheduelerApp.recipe.schedule">Schedule</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recipe of recipes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/recipe', recipe.id, 'view']">{{ recipe.id }}</a>
+          </td>
+          <td>{{ recipe.name }}</td>
+          <td>{{ recipe.instructions }}</td>
+          <td>{{ recipe.nbOfPerson }}</td>
+          <td>{{ recipe.publicAccess }}</td>
+          <td>
+            {{ recipe.author?.id }}
+          </td>
+          <td>
+            <div *ngIf="recipe.schedule">
+              <a [routerLink]="['/schedule', recipe.schedule.id, 'view']">{{ recipe.schedule.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/recipe', recipe.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/recipe', recipe.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(recipe)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" mscheTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" jhiTranslate="metrics.jvm.threads.dump.title">Threads dump</h4>
+  <h4 class="modal-title" mscheTranslate="metrics.jvm.threads.dump.title">Threads dump</h4>
 
   <button type="button" class="btn-close" (click)="dismiss()">&times;</button>
 </div>
@@ -39,8 +39,8 @@
       &nbsp;{{ thread.threadName }} (ID {{ thread.threadId }})
 
       <a (click)="thread.showThreadDump = !thread.showThreadDump" href="javascript:void(0);">
-        <span [hidden]="thread.showThreadDump" jhiTranslate="metrics.jvm.threads.dump.show">Show Stacktrace</span>
-        <span [hidden]="!thread.showThreadDump" jhiTranslate="metrics.jvm.threads.dump.hide">Hide Stacktrace</span>
+        <span [hidden]="thread.showThreadDump" mscheTranslate="metrics.jvm.threads.dump.show">Afficher</span>
+        <span [hidden]="!thread.showThreadDump" mscheTranslate="metrics.jvm.threads.dump.hide">Cacher</span>
       </a>
     </h6>
 
@@ -64,11 +64,11 @@
       </caption>
       <thead>
         <tr>
-          <th scope="col" jhiTranslate="metrics.jvm.threads.dump.blockedtime">Blocked Time</th>
-          <th scope="col" jhiTranslate="metrics.jvm.threads.dump.blockedcount">Blocked Count</th>
-          <th scope="col" jhiTranslate="metrics.jvm.threads.dump.waitedtime">Waited Time</th>
-          <th scope="col" jhiTranslate="metrics.jvm.threads.dump.waitedcount">Waited Count</th>
-          <th scope="col" jhiTranslate="metrics.jvm.threads.dump.lockname">Lock name</th>
+          <th scope="col" mscheTranslate="metrics.jvm.threads.dump.blockedtime">Temps bloqué</th>
+          <th scope="col" mscheTranslate="metrics.jvm.threads.dump.blockedcount">Nb fois bloqué</th>
+          <th scope="col" mscheTranslate="metrics.jvm.threads.dump.waitedtime">Temps d'attente</th>
+          <th scope="col" mscheTranslate="metrics.jvm.threads.dump.waitedcount">Nb fois en attente</th>
+          <th scope="col" mscheTranslate="metrics.jvm.threads.dump.lockname">Nom du process bloquant</th>
         </tr>
       </thead>
       <tbody>
