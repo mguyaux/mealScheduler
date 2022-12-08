@@ -1,0 +1,56 @@
+{
+  "applications": ["mealSchedueler"],
+  "changelogDate": "20221208201643",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "recipe",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "instructions",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nbOfPerson",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "publicAccess",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Recipe",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "author",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "recipe",
+      "relationshipName": "schedule",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "recipeIngredient",
+      "otherEntityRelationshipName": "recipe",
+      "relationshipName": "ingredients",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,27 @@
+{
+  "mealScheduelerApp": {
+    "recipeIngredient": {
+      "home": {
+        "title": "RecipeIngredients",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Recipe Ingredient",
+        "createOrEditLabel": "Créer ou éditer un Recipe Ingredient",
+        "notFound": "Aucun Recipe Ingredient trouvé"
+      },
+      "created": "Un nouveau Recipe Ingredient a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Recipe Ingredient avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Recipe Ingredient avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Recipe Ingredient {{ id }} ?"
+      },
+      "detail": {
+        "title": "Recipe Ingredient"
+      },
+      "id": "ID",
+      "quantity": "Quantity",
+      "recipe": "Recipe",
+      "unit": "Unit",
+      "ingredient": "Ingredient"
+    }
+  }
+}

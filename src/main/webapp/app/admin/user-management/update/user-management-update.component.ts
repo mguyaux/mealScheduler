@@ -9,12 +9,12 @@ import { UserManagementService } from '../service/user-management.service';
 const userTemplate = {} as IUser;
 
 const newUser: IUser = {
-  langKey: 'en',
+  langKey: 'fr',
   activated: true,
 } as IUser;
 
 @Component({
-  selector: 'jhi-user-mgmt-update',
+  selector: 'msche-user-mgmt-update',
   templateUrl: './user-management-update.component.html',
 })
 export class UserManagementUpdateComponent implements OnInit {

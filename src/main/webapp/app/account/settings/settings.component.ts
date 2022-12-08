@@ -9,7 +9,7 @@ import { LANGUAGES } from 'app/config/language.constants';
 const initialAccount: Account = {} as Account;
 
 @Component({
-  selector: 'jhi-settings',
+  selector: 'msche-settings',
   templateUrl: './settings.component.html',
 })
 export class SettingsComponent implements OnInit {

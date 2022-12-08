@@ -1,0 +1,38 @@
+{
+  "applications": ["mealSchedueler"],
+  "changelogDate": "20221208201644",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "recipe_ingredient",
+  "fields": [
+    {
+      "fieldName": "quantity",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "RecipeIngredient",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "recipe",
+      "otherEntityRelationshipName": "ingredients",
+      "relationshipName": "recipe",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "mesure",
+      "relationshipName": "unit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "ingredient",
+      "relationshipName": "ingredient",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

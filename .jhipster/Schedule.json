@@ -1,0 +1,39 @@
+{
+  "applications": ["mealSchedueler"],
+  "changelogDate": "20221208201648",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "schedule",
+  "fields": [
+    {
+      "fieldName": "meal",
+      "fieldType": "Meal",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "BREAKFAST,LUNCH,DINNER"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Schedule",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "recipe",
+      "otherEntityRelationshipName": "schedule",
+      "relationshipName": "recipe",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="recipeIngredient">
+      <h2 data-cy="recipeIngredientDetailsHeading">
+        <span mscheTranslate="mealScheduelerApp.recipeIngredient.detail.title">Recipe Ingredient</span>
+      </h2>
+
+      <hr />
+
+      <msche-alert-error></msche-alert-error>
+
+      <msche-alert></msche-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span mscheTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ recipeIngredient.id }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.recipeIngredient.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ recipeIngredient.quantity }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.recipeIngredient.recipe">Recipe</span></dt>
+        <dd>
+          <div *ngIf="recipeIngredient.recipe">
+            <a [routerLink]="['/recipe', recipeIngredient.recipe.id, 'view']">{{ recipeIngredient.recipe.id }}</a>
+          </div>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.recipeIngredient.unit">Unit</span></dt>
+        <dd>
+          <div *ngIf="recipeIngredient.unit">
+            <a [routerLink]="['/mesure', recipeIngredient.unit.id, 'view']">{{ recipeIngredient.unit.id }}</a>
+          </div>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.recipeIngredient.ingredient">Ingredient</span></dt>
+        <dd>
+          <div *ngIf="recipeIngredient.ingredient">
+            <a [routerLink]="['/ingredient', recipeIngredient.ingredient.id, 'view']">{{ recipeIngredient.ingredient.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span mscheTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/recipe-ingredient', recipeIngredient.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span mscheTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

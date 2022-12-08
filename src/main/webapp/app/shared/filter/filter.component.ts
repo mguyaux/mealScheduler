@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { IFilterOptions } from './filter.model';
 
 @Component({
-  selector: 'jhi-filter',
+  selector: 'msche-filter',
   templateUrl: './filter.component.html',
 })
 export class FilterComponent {

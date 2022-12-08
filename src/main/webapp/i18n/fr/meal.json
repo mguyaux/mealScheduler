@@ -1,0 +1,10 @@
+{
+  "mealScheduelerApp": {
+    "Meal": {
+      "null": "",
+      "BREAKFAST": "BREAKFAST",
+      "LUNCH": "LUNCH",
+      "DINNER": "DINNER"
+    }
+  }
+}

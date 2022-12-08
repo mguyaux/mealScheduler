@@ -1,0 +1,25 @@
+{
+  "mealScheduelerApp": {
+    "userInfo": {
+      "home": {
+        "title": "UserInfos",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau User Info",
+        "createOrEditLabel": "Créer ou éditer un User Info",
+        "notFound": "Aucun User Info trouvé"
+      },
+      "created": "Un nouveau User Info a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Info avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Info avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le User Info {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Info"
+      },
+      "id": "ID",
+      "nbOfPerson": "Nb Of Person",
+      "user": "User"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<form *ngIf="schedule" name="deleteForm" (ngSubmit)="confirmDelete(schedule.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="scheduleDeleteDialogHeading" mscheTranslate="entity.delete.title">Confirmation de suppression</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <msche-alert-error></msche-alert-error>
+    <p
+      id="msche-delete-schedule-heading"
+      mscheTranslate="mealScheduelerApp.schedule.delete.question"
+      [translateValues]="{ id: schedule.id }"
+    >
+      Êtes-vous certain de vouloir supprimer le Schedule {{ schedule.id }} ?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span mscheTranslate="entity.action.cancel">Annuler</span>
+    </button>
+
+    <button id="msche-confirm-delete-schedule" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span mscheTranslate="entity.action.delete">Supprimer</span>
+    </button>
+  </div>
+</form>

@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="userInfo">
+      <h2 data-cy="userInfoDetailsHeading"><span mscheTranslate="mealScheduelerApp.userInfo.detail.title">User Info</span></h2>
+
+      <hr />
+
+      <msche-alert-error></msche-alert-error>
+
+      <msche-alert></msche-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span mscheTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ userInfo.id }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.userInfo.nbOfPerson">Nb Of Person</span></dt>
+        <dd>
+          <span>{{ userInfo.nbOfPerson }}</span>
+        </dd>
+        <dt><span mscheTranslate="mealScheduelerApp.userInfo.user">User</span></dt>
+        <dd>
+          <span>{{ userInfo.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span mscheTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/user-info', userInfo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span mscheTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

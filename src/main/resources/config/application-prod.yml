@@ -17,14 +17,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    fr.mguyaux.meal.scheduler: INFO
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
+    com.mycompany.myapp: INFO
 
 management:
   metrics:
@@ -38,22 +31,10 @@ spring:
       enabled: false
     livereload:
       enabled: false
-  cloud:
-    config:
-      retry:
-        initial-interval: 1000
-        max-interval: 2000
-        max-attempts: 100
-      uri: http://admin:${jhipster.registry.password}@localhost:8761/config
-      # name of the config server's property source (file.yml) that we want to use
-      name: mealScheduler
-      profile: prod
-      label: main # toggle to switch to a different version of the configuration as stored in git
-      # it can be set to any label, branch or commit of the configuration source Git repository
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/mealScheduler
-    username: mealScheduler
+    url: jdbc:postgresql://localhost:5432/mealSchedueler
+    username: mealSchedueler
     password:
     hikari:
       poolName: Hikari
@@ -70,24 +51,10 @@ spring:
     password:
   thymeleaf:
     cache: true
-  sleuth:
-    # https://github.com/spring-projects/spring-framework/issues/27844#issuescomment-1002866885
-    # https://github.com/spring-cloud/spring-cloud-sleuth/issues/2094
-    async:
-      enabled: false
-    enabled: false
-    sampler:
-      probability: 1 # report 100% of traces
-  zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
-    base-url: http://localhost:9411
-    enabled: false
-    locator:
-      discovery:
-        enabled: true
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
-# keytool -genkey -alias mealscheduler -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias mealschedueler -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # See details in topic "Create a Java Keystore (.JKS) from Let's Encrypt Certificates" on https://maximilian-boehm.com/en-gb/blog
@@ -126,8 +93,6 @@ jhipster:
     ehcache: # Ehcache configuration
       time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
       max-entries: 1000 # Number of objects in each cache entry
-  registry:
-    password: admin
   security:
     authentication:
       jwt:
