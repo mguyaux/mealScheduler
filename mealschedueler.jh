@@ -1,0 +1,66 @@
+
+application {
+  config {
+    baseName mealSchedueler
+    applicationType monolith
+    authenticationType jwt
+    buildTool maven
+    cacheProvider ehcache
+    clientFramework angularX
+    databaseType sql
+    devDatabaseType h2Disk
+    prodDatabaseType postgresql
+    jhiPrefix msche
+    nativeLanguage fr
+    testFrameworks []
+    blueprints [kotlin]
+  }
+  entities *
+}
+
+
+entity Recipe {
+	name String required
+    instructions TextBlob required
+    nbOfPerson Integer required min(0)
+    publicAccess Boolean required
+}
+
+entity RecipeIngredient {
+	quantity Float required
+
+}
+
+entity Mesure {
+	symbol String required
+}
+
+entity Ingredient {
+	name String required
+}
+
+entity UserInfo {
+	nbOfPerson Integer required min(1)
+}
+
+enum Meal {
+	BREAKFAST, LUNCH, DINNER
+}
+
+entity Schedule {
+	meal Meal required
+    date LocalDate required
+}
+
+relationship ManyToOne {
+	RecipeIngredient{recipe} to Recipe{ingredients}
+    RecipeIngredient{unit} to Mesure
+    RecipeIngredient{ingredient} to Ingredient
+    Recipe{author} to User
+    Schedule{user} to User
+    Recipe to Schedule{recipe}
+}
+
+relationship OneToOne {
+	UserInfo{user} to User
+}
